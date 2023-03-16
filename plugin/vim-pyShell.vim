@@ -1,6 +1,10 @@
 let g:tmuxcnf   = '-f \"' . $HOME . "/.tmux.conf" . '\"'
 let g:inPasteMode = 0
 
+if !exists("g:pysparkMode")
+    let g:pysparkMode = 0
+endif
+
 if !exists("g:inTmux")
   let g:inTmux = 0
 endif
@@ -21,16 +25,16 @@ function! StopPyShell()
   call VimuxRunCommand("exit")
 endfunction
 
-function! PyShellEnterPateEnv()
+function! PyShellEnterPasteEnv()
   if !g:inPasteMode && !g:pysparkMode
     let g:inPasteMode = 1
-    call VimuxRunCommand(":paste\r")
+    "call VimuxRunCommand(":paste\r")
   endif
 endfunction
 
 function! PyShellExitPasteEnv()
   if g:inPasteMode && !g:pysparkMode
-    call VimuxRunCommand("C-d")
+    "call VimuxRunCommand("C-d")
     let g:inPasteMode = 0
   endif
 endfunction
